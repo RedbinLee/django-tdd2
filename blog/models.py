@@ -1,4 +1,5 @@
 from pyexpat import model
+from tabnanny import verbose
 from django.db import models
 
 # Create your models here.
@@ -13,3 +14,6 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = "entries"
