@@ -3,8 +3,8 @@
 {% block content %}
 
 <body>
-    {% if entry_list %}
     {% for entry in entry_list %}
+
     <article>
         <h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2>
 
@@ -17,15 +17,12 @@
         {{ entry.body|linebreaks }}
 
     </article>
-    {% endfor %}
-    {% else %}
+
+    {% empty %}
+
     <p> No blog entries yet.</p>
-    {% endif %}
-    <!-- <section class=" row">
-        <header class="large-12 columns">
-            <h1>Welcome to This Blog</h1>
-        </header>
-    </section> -->
+
+    {% endfor %}
 </body>
 
 {% endblock content %}
