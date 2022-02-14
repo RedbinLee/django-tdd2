@@ -1,4 +1,7 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 
-# Create your views here.
+from .models import Entry
+
+# show the details of Entry and render it to a template.
+class EntryDetail(DetailView) :
+    model = Entry
