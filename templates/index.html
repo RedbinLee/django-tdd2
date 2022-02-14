@@ -1,22 +1,28 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-    <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
-</head>
+{% block content %}
 
 <body>
-    <section class=" row">
+
+    {% for entry in entry_list %}
+    <article>
+        <h2><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h2>
+
+        <p class="subheader">
+            <time>{{ entry.modified_at|date }}</time>
+        </p>
+
+        <p></p>
+
+        {{ entry.body|linebreaks }}
+
+    </article>
+    {% endfor %}
+    <!-- <section class=" row">
         <header class="large-12 columns">
             <h1>Welcome to This Blog</h1>
         </header>
-    </section>
+    </section> -->
 </body>
 
-</html>
+{% endblock content %}
