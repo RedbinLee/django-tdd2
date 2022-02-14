@@ -13,7 +13,9 @@ class Entry(models.Model):
     modified_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
+        # change the  __self__ method!! from object to title
         return self.title
 
     class Meta:
+        # this will be tested under the _meta class in test.py
         verbose_name_plural = "entries"
