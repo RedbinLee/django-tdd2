@@ -44,3 +44,8 @@ class HomePageTests(TestCase) :
         self.assertContains(response, '1-title')
         self.assertContains(response, '1-body')
         self.assertContains(response, '2-title')
+
+    # check when there are no entries.
+    def test_no_entries(self) :
+        response = self.client.get('/')
+        self.assertContains(response, 'No blog entries yet.')
