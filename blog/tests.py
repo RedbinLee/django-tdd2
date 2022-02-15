@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from .models import Entry
+from .models import Entry, Comment
 # Create your tests here.
 
 # check Entry Model
@@ -75,3 +75,8 @@ class EntryViewTest(TestCase) :
     def test_body_in_entry(self) :
         response = self.client.get(self.entry.get_absolute_url())
         self.assertContains(response, self.entry.body)
+
+class CommentModelTest(TestCase) :
+    def test_string_representation(self) :
+        comment = Comment(body="My comment body")
+        self.assertEqual(str(comment),"My comment body")
