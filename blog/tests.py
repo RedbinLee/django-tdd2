@@ -80,3 +80,26 @@ class CommentModelTest(TestCase) :
     def test_string_representation(self) :
         comment = Comment(body="My comment body")
         self.assertEqual(str(comment),"My comment body")
+
+class CommentViewTest(TestCase) :
+    def setUp(self) :
+        # 1. create useer for entry
+        self.user = get_user_model().objects.create(username='user1')
+        # 2. create entry for comment
+        self.entry = Entry.objects.create(title = '1-title', body = '1-body', author = self.user)
+       
+    
+    # check if the comment appears on the entry detail page
+    def test_comment(self) :
+        # 3. create comment
+        self.comment = Comment.objects.create(entry=self.entry, name='comment name', email='email@test.com', body = 'comment created')
+        # when we get to the entry's detail page
+        response = self.client.get(self.entry.get_absolute_url())
+        # check if the response contains 'coment created'
+        self.assertContains(response, 'comment created')
+    
+    # check it's ok when there is no comment
+    def test_no_comment(self) :
+        response = self.client.get(self.entry.get_absolute_url())
+        # check the response contains the words 'No comments yet.'
+        self.assertContains(response, 'No comments yet.')
